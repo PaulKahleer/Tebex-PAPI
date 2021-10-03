@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'antlr'
+    id 'fr.il_totore.manadrop' version '0.4.1-SNAPSHOT'
+}
+
+group 'it.coralmc.tebexpapi'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven { url = "https://oss.sonatype.org/content/repositories/snapshots"}
+    maven { url = "https://oss.sonatype.org/content/repositories/central"}
+    mavenCentral()
+}
+
+dependencies {
+    antlr "org.antlr:antlr4:4.5"
+    compileOnly "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+}
+
+sourceSets.main {
+    java.srcDir("src")
+    resources.srcDir("resources")
+}
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ["-visitor", "-long-messages"]
+    outputDirectory = file("src/main/java/it/coralmc/tebexpapi/antlr")
+}
