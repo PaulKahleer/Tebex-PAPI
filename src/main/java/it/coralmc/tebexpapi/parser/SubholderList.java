@@ -6,7 +6,15 @@ public class SubholderList {
 
     private ArrayList<ParsedHolder> placeholders;
 
-    public SubholderList() {
+    private static SubholderList instance;
+    public static SubholderList getHolders() {
+        if(instance == null) {
+            instance = new SubholderList();
+        }
+        return instance;
+    }
+
+    private SubholderList() {
         placeholders = new ArrayList<>();
 
         registerHolder(new CommunityGoalsHolder());
@@ -29,5 +37,6 @@ public class SubholderList {
                 return holder.parsePlaceholder(args);
             }
         }
+        return null;
     }
 }

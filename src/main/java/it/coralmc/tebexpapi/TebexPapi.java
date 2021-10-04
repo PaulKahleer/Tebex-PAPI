@@ -1,5 +1,6 @@
 package it.coralmc.tebexpapi;
 
+import it.coralmc.tebexpapi.parser.SubholderList;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 
@@ -22,7 +23,6 @@ public class TebexPapi extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        String[] args = params.split("_");
-        String endpoint = args[0];
+        return SubholderList.getHolders().parseGlobal(params);
     }
 }

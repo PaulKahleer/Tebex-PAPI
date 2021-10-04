@@ -13,7 +13,7 @@ import java.io.IOException;
 public class TestMain {
 
     public static void main(String[] args) throws IOException {
-        String tebexSecret = "";
+        String tebexSecret = Config.getConfig().tebexSecret;
 
         TebexAPI api = new TebexAPI(tebexSecret);
 
