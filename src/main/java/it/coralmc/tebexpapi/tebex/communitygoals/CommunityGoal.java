@@ -1,4 +1,4 @@
-package it.coralmc.tebexpapi.tebex;
+package it.coralmc.tebexpapi.tebex.communitygoals;
 
 import java.time.OffsetDateTime;
 

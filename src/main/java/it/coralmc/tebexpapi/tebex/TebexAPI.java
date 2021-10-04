@@ -2,6 +2,9 @@ package it.coralmc.tebexpapi.tebex;
 
 import com.google.gson.Gson;
 import it.coralmc.tebexpapi.Request;
+import it.coralmc.tebexpapi.tebex.communitygoals.CommunityGoal;
+import it.coralmc.tebexpapi.tebex.information.Information;
+import it.coralmc.tebexpapi.tebex.listing.Listing;
 
 import java.io.IOException;
 
@@ -26,5 +29,25 @@ public class TebexAPI {
                 .complete();
 
         return gson.fromJson(response.getContent(), CommunityGoal.class);
+    }
+
+    public Information getInformation() throws IOException {
+        Request.Response response = new Request("https://plugin.tebex.io/")
+                .appendPath("information")
+                .setMethod(Request.Method.GET)
+                .setHeader("X-Tebex-Secret", this.secret)
+                .complete();
+
+        return gson.fromJson(response.getContent(), Information.class);
+    }
+
+    public Listing getListing() throws IOException {
+        Request.Response response = new Request("https://plugin.tebex.io/")
+                .appendPath("listing")
+                .setMethod(Request.Method.GET)
+                .setHeader("X-Tebex-Secret", this.secret)
+                .complete();
+
+        return gson.fromJson(response.getContent(), Listing.class);
     }
 }
