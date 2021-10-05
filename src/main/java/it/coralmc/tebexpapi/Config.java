@@ -6,14 +6,22 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 public class Config {
-    String tebexSecret = "";
-    int cacheExpire = 30;
+    private String tebexSecret = "";
+    private int cacheExpire = 30;
+
+    public String getSecret() {
+        return this.tebexSecret;
+    }
+    public int getExpire() {
+        return this.cacheExpire;
+    }
 
     private static Config instance;
     private Config() {}
+
     public static Config getConfig() throws IOException {
         Gson gson = new Gson();
-        File configFile = new File("tebex_conf.json");
+        File configFile = new File("plugins/PlaceholderAPI/expansions/tebex_conf.json");
 
         if(!configFile.exists()) {
             Config newConf = new Config();
