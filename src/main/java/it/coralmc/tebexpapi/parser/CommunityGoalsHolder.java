@@ -13,6 +13,9 @@ public class CommunityGoalsHolder implements ParsedHolder {
         return "communitygoals";
     }
 
+    CommunityGoal goal;
+    long expireTime = 0;
+
     @Override
     public String parsePlaceholder(String toParse) {
         String[] split = toParse.split("_");
@@ -21,7 +24,10 @@ public class CommunityGoalsHolder implements ParsedHolder {
 
         try {
             TebexAPI api = new TebexAPI(Config.getConfig().getSecret());
-            CommunityGoal goal = api.getCommunityGoal(goalId);
+            if(expireTime < System.currentTimeMillis()) {
+                goal = api.getCommunityGoal(goalId);
+                expireTime = System.currentTimeMillis() + (Config.getConfig().getExpire()*1000L);
+            }
             Field field = CommunityGoal.class.getDeclaredField(property);
             field.setAccessible(true);
             return String.valueOf(field.get(goal));
